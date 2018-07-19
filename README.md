@@ -9,10 +9,12 @@ Activate your virtual environment from the command line, run:
 
 To use in your code:
 > import CSUtils
+> 
 > CSUtils.function(params)
 
 or
 > from CSUtils import function
+> 
 > function(params)
 
 ## Documentation
