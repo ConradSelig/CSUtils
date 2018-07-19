@@ -3,6 +3,7 @@ A small set of Utilities designed by Conrad Selig for general use in almost any 
 
 
 ##How to Install
+
 Activate your virtual environment from the command line, run:
 > pip install git+https://github.com/ConradSelig/CSUtils
 
@@ -15,7 +16,9 @@ or
 > function(params)
 
 ##Documentation
+
 ** match_data(current, all_data): **
+
 * Take in two similar stuctures of data
 * Currently Supports the following stuctures:
 	* comma seperated string
