@@ -1,9 +1,7 @@
-import json
-
-from collections import OrderedDict
-
 
 def match_data(current, all_data):
+    import json
+    from collections import OrderedDict
 
     def try_dict(current_dict, all_data_dict):
         if "{" in current_dict and "{" in all_data_dict:
@@ -48,3 +46,57 @@ def match_data(current, all_data):
         current = ",".join(current)
 
     return current
+
+
+def count_project_lines(project_path, file_types=[], file_names=[], discludes=[]):
+    import os
+
+    try:
+        project_files = os.listdir(project_path)
+    except FileNotFoundError:
+        return None
+
+    lines = 0
+
+    if len(file_names) > 0:
+        for project_file in project_files:
+            for file in file_names:
+                if file in project_file and not any([file in out_file for out_file in discludes]):
+                    try:
+                        io_file = open(file, 'r')
+                    except PermissionError:
+                        continue
+                    except FileNotFoundError:
+                        continue
+                    data = io_file.readlines()
+                    io_file.close()
+                    lines += len(data)
+        return lines
+
+    if len(file_types) > 0:
+        for file_type in file_types:
+            for file in project_files:
+                if file_type in file and not any([file in out_file for out_file in discludes]):
+                    try:
+                        io_file = open(file, 'r')
+                    except PermissionError:
+                        continue
+                    except FileNotFoundError:
+                        continue
+                    data = io_file.readlines()
+                    io_file.close()
+                    lines += len(data)
+    else:
+        for file in project_files:
+            if not any([file in out_file for out_file in discludes]):
+                try:
+                    io_file = open(file, 'r')
+                except PermissionError:
+                    continue
+                except FileNotFoundError:
+                    continue
+                data = io_file.readlines()
+                io_file.close()
+                lines += len(data)
+
+    return lines
