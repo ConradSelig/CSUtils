@@ -48,8 +48,11 @@ def match_data(current, all_data):
     return current
 
 
-def count_project_lines(project_path, file_types=[], file_names=[], discludes=[]):
+def count_project_lines(project_path="", file_types=[], file_names=[], discludes=[]):
     import os
+
+    if project_path == "":
+        project_path = os.getcwd()
 
     try:
         project_files = os.listdir(project_path)
@@ -70,7 +73,7 @@ def count_project_lines(project_path, file_types=[], file_names=[], discludes=[]
                         continue
                     data = io_file.readlines()
                     io_file.close()
-                    lines += len(data)
+                    lines += len(data) + 1
         return lines
 
     if len(file_types) > 0:
@@ -85,7 +88,7 @@ def count_project_lines(project_path, file_types=[], file_names=[], discludes=[]
                         continue
                     data = io_file.readlines()
                     io_file.close()
-                    lines += len(data)
+                    lines += len(data) + 1
     else:
         for file in project_files:
             if not any([file in out_file for out_file in discludes]):
@@ -97,6 +100,6 @@ def count_project_lines(project_path, file_types=[], file_names=[], discludes=[]
                     continue
                 data = io_file.readlines()
                 io_file.close()
-                lines += len(data)
+                lines += len(data) + 1
 
     return lines
