@@ -2,7 +2,7 @@
 A small set of Utilities designed by Conrad Selig for general use in almost any project.
 
 
-##How to Install
+## How to Install
 
 Activate your virtual environment from the command line, run:
 > pip install git+https://github.com/ConradSelig/CSUtils
@@ -15,9 +15,9 @@ or
 > from CSUtils import function
 > function(params)
 
-##Documentation
+## Documentation
 
-** match_data(current, all_data): **
+**match_data(current, all_data):**
 
 * Take in two similar stuctures of data
 * Currently Supports the following stuctures:
@@ -30,4 +30,4 @@ or
 	* all = "a,b,c,d,e"
 	* output = "a,c,d,b,e"
 
-This readme was built with: https://pandao.github.io/editor.md/en.html. Thank you!
+This readme was built with https://pandao.github.io/editor.md/en.html and https://jbt.github.io/markdown-editor/. Thank you!
