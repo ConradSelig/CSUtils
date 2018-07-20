@@ -8,13 +8,11 @@ Activate your virtual environment from the command line, run:
 > pip install git+https://github.com/ConradSelig/CSUtils
 
 To use in your code:
-> import CSUtils
-> 
+> import CSUtils <br>
 > CSUtils.function(params)
 
 or
-> from CSUtils import function
-> 
+> from CSUtils import function <br>
 > function(params)
 
 ## Documentation
@@ -41,5 +39,35 @@ or
 * Uses current working directory if not directory is provided.
 * Outputs 0 if project directory not found.
 * Adds 0 to count for every file provided not found, or files with permissions errors (".gitignore" for example).
+
+**class Switch(expression):**
+* A basic implementation of Switch Case in Python.
+* Instantiate the class to a variable with an expression, then call your_var.case(case_value).
+* Switch.case(value) returns a boolean.
+* Expressions passed to Switch formatted as conditionals are evaluated to booleans.<br>
+
+Examples:
+> from CSUtils import Switch <br>
+> import datetime <br>
+>
+> \#datetime expression evalueates to integer based on weekday <br>
+> switch = Switch(datetime.datetime.now().weekday()) <br>
+> 
+> if switch.case(0): <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;day = "Monday" <br>
+> elif switch.case(1): <br>
+>    &nbsp;&nbsp;&nbsp;&nbsp;day = "Tuesday" <br>
+
+Ready to use example:
+
+> from CSUtils import Switch <br>
+>
+> switch = Switch("1==1")
+>
+> if switch.case(True): <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;print("Expression True!") <br>
+> elif switch.case(False): <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;print("Expression False!") <br>
+
 
 This readme was built with https://pandao.github.io/editor.md/en.html and https://jbt.github.io/markdown-editor/. Thank you!

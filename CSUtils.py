@@ -112,3 +112,58 @@ def count_project_lines(project_path="", file_types=[], file_names=[], excludes=
                 lines += len(data)
 
     return lines
+
+
+class Switch:
+    expression_value = ""
+
+    def __init__(self, expression):
+
+        if isinstance(expression, str):
+            self.expression_value = expression
+            expression = expression.replace(" ", "")
+
+            if "==" in expression:
+                sides = expression.split("==")
+                if sides[0] == sides[1]:
+                    self.expression_value = True
+                else:
+                    self.expression_value = False
+
+            elif ">=" in expression:
+                sides = expression.split(">=")
+                if sides[0] >= sides[1]:
+                    self.expression_value = True
+                else:
+                    self.expression_value = False
+
+            elif "<=" in expression:
+                sides = expression.split("<=")
+                if sides[0] <= sides[1]:
+                    self.expression_value = True
+                else:
+                    self.expression_value = False
+
+            elif ">" in expression:
+                sides = expression.split(">")
+                if sides[0] > sides[1]:
+                    self.expression_value = True
+                else:
+                    self.expression_value = False
+
+            elif "<" in expression:
+                sides = expression.split("<")
+                if sides[0] < sides[1]:
+                    self.expression_value = True
+                else:
+                    self.expression_value = False
+        else:
+            self.expression_value = expression
+
+    def case(self, value):
+        if value == self.expression_value:
+            return True
+        return False
+
+    def get_expression_value(self):
+        return self.expression_value
