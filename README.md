@@ -32,7 +32,7 @@ or
 	* all = "a,b,c,d,e"
 	* output = "a,c,d,b,e"
 
-**count_project_lines(project_path, file_types=[], file_names=[], discludes=[]):**
+**count_project_lines(project_path="", file_types=[], file_names=[], discludes=[]):**
 * Counts the lines of a project given specifying parameters.
 * Takes the name of the directory to count, as well as:
     * List of string file type ie [".py",".txt"].

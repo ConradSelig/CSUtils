@@ -48,7 +48,7 @@ def match_data(current, all_data):
     return current
 
 
-def count_project_lines(project_path="", file_types=[], file_names=[], discludes=[]):
+def count_project_lines(project_path="", file_types=[], file_names=[], excludes=[]):
     import os
 
     if project_path == "":
@@ -59,12 +59,21 @@ def count_project_lines(project_path="", file_types=[], file_names=[], discludes
     except FileNotFoundError:
         return None
 
+    if isinstance(file_types, str):
+        file_types = file_types.split(",")
+
+    if isinstance(file_names, str):
+        file_names = file_names.split(",")
+
+    if isinstance(excludes, str):
+        excludes = excludes.split(",")
+
     lines = 0
 
     if len(file_names) > 0:
         for project_file in project_files:
             for file in file_names:
-                if file in project_file and not any([file in out_file for out_file in discludes]):
+                if file in project_file and not any([file in out_file for out_file in excludes]):
                     try:
                         io_file = open(file, 'r')
                     except PermissionError:
@@ -73,13 +82,13 @@ def count_project_lines(project_path="", file_types=[], file_names=[], discludes
                         continue
                     data = io_file.readlines()
                     io_file.close()
-                    lines += len(data) + 1
+                    lines += len(data)
         return lines
 
     if len(file_types) > 0:
         for file_type in file_types:
             for file in project_files:
-                if file_type in file and not any([file in out_file for out_file in discludes]):
+                if file_type in file and not any([file in out_file for out_file in excludes]):
                     try:
                         io_file = open(file, 'r')
                     except PermissionError:
@@ -88,10 +97,10 @@ def count_project_lines(project_path="", file_types=[], file_names=[], discludes
                         continue
                     data = io_file.readlines()
                     io_file.close()
-                    lines += len(data) + 1
+                    lines += len(data)
     else:
         for file in project_files:
-            if not any([file in out_file for out_file in discludes]):
+            if not any([file in out_file for out_file in excludes]):
                 try:
                     io_file = open(file, 'r')
                 except PermissionError:
@@ -100,6 +109,6 @@ def count_project_lines(project_path="", file_types=[], file_names=[], discludes
                     continue
                 data = io_file.readlines()
                 io_file.close()
-                lines += len(data) + 1
+                lines += len(data)
 
     return lines
