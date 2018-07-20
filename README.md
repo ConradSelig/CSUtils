@@ -44,6 +44,7 @@ or
 * A basic implementation of Switch Case in Python.
 * Instantiate the class to a variable with an expression, then call your_var.case(case_value).
 * Switch.case(value) returns a boolean.
+* Switch.case() return True (default case)
 * Expressions passed to Switch formatted as conditionals are evaluated to booleans.<br>
 
 Examples:

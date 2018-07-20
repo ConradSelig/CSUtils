@@ -160,7 +160,9 @@ class Switch:
         else:
             self.expression_value = expression
 
-    def case(self, value):
+    def case(self, value=""):
+        if value == "":
+            return True
         if value == self.expression_value:
             return True
         return False
