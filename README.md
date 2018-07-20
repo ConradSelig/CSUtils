@@ -47,19 +47,31 @@ or
 * Switch.case() return True (default case)
 * Expressions passed to Switch formatted as conditionals are evaluated to booleans.<br>
 
-Examples:
+Ready to use examples:
 > from CSUtils import Switch <br>
 > import datetime <br>
 >
-> \#datetime expression evalueates to integer based on weekday <br>
-> switch = Switch(datetime.datetime.now().weekday()) <br>
-> 
-> if switch.case(0): <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;day = "Monday" <br>
-> elif switch.case(1): <br>
->    &nbsp;&nbsp;&nbsp;&nbsp;day = "Tuesday" <br>
+> with Switch(datetime.datetime.now().weekday()) as case: <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;if case(0): <br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day = "Monday" <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;elif case(1): <br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day = "Tuesday" <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;elif case(2): <br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day = "Wednesday" <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;elif case(3): <br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day = "Thursday" <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;elif case(4): <br>
+>       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day = "Friday" <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;elif case(5): <br>
+>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day = "Saturday" <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;elif case(6): <br>
+>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day = "Sunday" <br>
+>   &nbsp;&nbsp;&nbsp;&nbsp;elif case(): <br>
+>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;day = "No day found with that index."
+>
+> print(day)
 
-Ready to use example:
+Using it like this allows the switch to be persistent, this means more case statements can be used with the same expression later in the code.
 
 > from CSUtils import Switch <br>
 >

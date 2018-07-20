@@ -114,8 +114,14 @@ def count_project_lines(project_path="", file_types=[], file_names=[], excludes=
     return lines
 
 
-class Switch:
+class Switch(object):
     expression_value = ""
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, type, value, traceback):
+        pass
 
     def __init__(self, expression):
 
@@ -159,6 +165,9 @@ class Switch:
                     self.expression_value = False
         else:
             self.expression_value = expression
+
+    def __call__(self, value=""):
+        return self.case(value)
 
     def case(self, value=""):
         if value == "":
