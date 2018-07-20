@@ -124,46 +124,6 @@ class Switch(object):
         pass
 
     def __init__(self, expression):
-
-        if isinstance(expression, str):
-            self.expression_value = expression
-            expression = expression.replace(" ", "")
-
-            if "==" in expression:
-                sides = expression.split("==")
-                if sides[0] == sides[1]:
-                    self.expression_value = True
-                else:
-                    self.expression_value = False
-
-            elif ">=" in expression:
-                sides = expression.split(">=")
-                if sides[0] >= sides[1]:
-                    self.expression_value = True
-                else:
-                    self.expression_value = False
-
-            elif "<=" in expression:
-                sides = expression.split("<=")
-                if sides[0] <= sides[1]:
-                    self.expression_value = True
-                else:
-                    self.expression_value = False
-
-            elif ">" in expression:
-                sides = expression.split(">")
-                if sides[0] > sides[1]:
-                    self.expression_value = True
-                else:
-                    self.expression_value = False
-
-            elif "<" in expression:
-                sides = expression.split("<")
-                if sides[0] < sides[1]:
-                    self.expression_value = True
-                else:
-                    self.expression_value = False
-        else:
             self.expression_value = expression
 
     def __call__(self, value=""):

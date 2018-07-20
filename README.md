@@ -47,7 +47,7 @@ or
     * Option 2: Instantiate the class to a variable with an expression, then call your_var.case(case_value).
 * Switch.case(value) returns a boolean.
 * Switch.case() return True (default case)
-* Expressions passed to Switch formatted as conditionals are evaluated to booleans.<br>
+* Given a conditional statement, Switch evaluates it to a boolean.<br>
 
 Ready to use examples:
 > from CSUtils import Switch <br>
@@ -77,7 +77,7 @@ Using it like this allows the switch to be persistent, this means more case stat
 
 > from CSUtils import Switch <br>
 >
-> switch = Switch("1==1")
+> switch = Switch(1 == 1)
 >
 > if switch.case(True): <br>
 > &nbsp;&nbsp;&nbsp;&nbsp;print("Expression True!") <br>
