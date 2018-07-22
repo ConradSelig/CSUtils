@@ -48,7 +48,7 @@ def match_data(current, all_data):
     return current
 
 
-def count_project_lines(project_path="", file_types=[], file_names=[], excludes=[]):
+def count_project_lines(project_path="", file_types=[], includes=[], excludes=[]):
     import os
 
     if project_path == "":
@@ -62,23 +62,25 @@ def count_project_lines(project_path="", file_types=[], file_names=[], excludes=
     if isinstance(file_types, str):
         file_types = file_types.split(",")
 
-    if isinstance(file_names, str):
-        file_names = file_names.split(",")
+    if isinstance(includes, str):
+        includes = includes.split(",")
 
     if isinstance(excludes, str):
         excludes = excludes.split(",")
 
     lines = 0
 
-    if len(file_names) > 0:
+    if len(includes) > 0:
         for project_file in project_files:
-            for file in file_names:
+            for file in includes:
                 if file in project_file and not any([file in out_file for out_file in excludes]):
                     try:
                         io_file = open(file, 'r')
                     except PermissionError:
                         continue
                     except FileNotFoundError:
+                        continue
+                    except IsADirectoryError:
                         continue
                     data = io_file.readlines()
                     io_file.close()
@@ -95,6 +97,8 @@ def count_project_lines(project_path="", file_types=[], file_names=[], excludes=
                         continue
                     except FileNotFoundError:
                         continue
+                    except IsADirectoryError:
+                        continue
                     data = io_file.readlines()
                     io_file.close()
                     lines += len(data)
@@ -106,6 +110,8 @@ def count_project_lines(project_path="", file_types=[], file_names=[], excludes=
                 except PermissionError:
                     continue
                 except FileNotFoundError:
+                    continue
+                except IsADirectoryError:
                     continue
                 data = io_file.readlines()
                 io_file.close()
