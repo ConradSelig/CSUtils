@@ -1,12 +1,11 @@
 import CSUtils
-import traceback
+import calendar
 
+import datetime
 from collections import OrderedDict
 
 
 def test_match_data():
-
-    errors = 0
 
     try:
         assert(CSUtils.match_data("a,c,e,f", "a,b,c,d,e") == "a,c,e,b,d")
@@ -15,14 +14,12 @@ def test_match_data():
                                   '{"a": [1, 2], "b": [3, 4], "c": [5, 6], "d": [7, 8], "e": [9, 10]}') ==
                OrderedDict([('a', [1, 2]), ('c', [5, 6]), ('e', [9, 10]), ('b', [3, 4]), ('d', [7, 8])]))
     except AssertionError:
-        errors += 1
+        return 1
 
-    return errors
+    return 0
 
 
 def test_line_count():
-
-    errors = 0
 
     file = open("CSUtils-test.py", "r")
     data = file.readlines()
@@ -34,16 +31,54 @@ def test_line_count():
         assert(CSUtils.count_project_lines(includes="CSUtils-test.py") == lines)
         assert(CSUtils.count_project_lines() != lines)
     except AssertionError:
-        errors += 1
+        return 1
 
-    return errors
+    return 0
 
 
 def test_switch():
+
+    day_of_week = datetime.date.today()
+    day_of_week = calendar.day_name[day_of_week.weekday()]
+
+    with CSUtils.Switch(datetime.datetime.now().weekday()) as case:
+        if case(0):
+            day = "Monday"
+        elif case(1):
+            day = "Tuesday"
+        elif case(2):
+            day = "Wednesday"
+        elif case(3):
+            day = "Thursday"
+        elif case(4):
+            day = "Friday"
+        elif case(5):
+            day = "Saturday"
+        elif case(6):
+            day = "Sunday"
+        elif case():
+            day = "No day found with that index."
+
+    switch = CSUtils.Switch(1 == 1)
+
+    if switch.case(True):
+        boolean_test = True
+    elif switch.case(False):
+        boolean_test = False
+    else:
+        boolean_test = None
+
+    try:
+        assert(day_of_week == day)
+        assert(boolean_test is True)
+    except AssertionError:
+        return 1
+
     return 0
 
 
 def run_tests():
+
     test_results = 0
 
     test_results += test_match_data()
