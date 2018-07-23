@@ -144,3 +144,27 @@ class Switch(object):
 
     def get_expression_value(self):
         return self.expression_value
+
+
+def flip(data, point_num=""):
+
+    if isinstance(data, bool):
+        if data:
+            return False
+        else:
+            return True
+
+    if isinstance(data, int) and isinstance(point_num, int):
+        if point_num >= data:
+            distance = point_num - data
+            return point_num + distance
+        else:
+            distance = data - point_num
+            return point_num - distance
+
+    if isinstance(data, int):
+        return int(str(data)[::-1])
+    if isinstance(data, str) or isinstance(data, list) or isinstance(data, tuple):
+        return data[::-1]
+
+    return None

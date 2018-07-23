@@ -77,6 +77,26 @@ def test_switch():
     return 0
 
 
+def test_flip():
+
+    try:
+        assert(CSUtils.flip(True) is False)
+        assert(CSUtils.flip(False) is True)
+        assert(CSUtils.flip("Hello World") == "dlroW olleH")
+        assert(CSUtils.flip(["Hello", "World"]) == ["World", "Hello"])
+        assert(CSUtils.flip(("Hello", "World")) == ("World", "Hello"))
+        assert(CSUtils.flip(123456789) == 987654321)
+        assert(CSUtils.flip(123456789) == 987654321)
+        assert(CSUtils.flip(1, 10) == 19)
+        assert(CSUtils.flip(3, 1) == -1)
+        assert(CSUtils.flip(-5, 5) == 15)
+        assert(CSUtils.flip(5, -5) == -15)
+        assert(CSUtils.flip(-1, -10) == -19)
+    except AssertionError:
+        return 1
+
+    return 0
+
 def run_tests():
 
     test_results = 0
@@ -84,6 +104,7 @@ def run_tests():
     test_results += test_match_data()
     test_results += test_line_count()
     test_results += test_switch()
+    test_results += test_flip()
 
     return test_results
 

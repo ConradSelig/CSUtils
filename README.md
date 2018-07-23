@@ -84,5 +84,17 @@ Using it like this allows the switch to be persistent, this means more case stat
 > elif switch.case(False): <br>
 > &nbsp;&nbsp;&nbsp;&nbsp;print("Expression False!") <br>
 
-
-This readme was built with https://pandao.github.io/editor.md/en.html and https://jbt.github.io/markdown-editor/. Thank you!
+**flip(data, point_num=""):**
+* Returns a flipped version of data.
+* Supports the following data types:
+    * Integer (1234 return 4321)
+    * String ("Hello World" return "dlroW olleH")
+    * List (["Hello", "World"] return ["World", "Hello"])
+    * Tuple (("Hello", "World") return ("World", "Hello"))
+    * Integer with flip value
+        * Finds the distance between the point_num and data and then "flips" over the point_num that distance.
+            * flip(1,10) returns 19
+            * flip(3,1) returns -1
+            * flip(-5, 5) returns 15 
+* Returns None if given invalid data type (like a dictionary).
+            
