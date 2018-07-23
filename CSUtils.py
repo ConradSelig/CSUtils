@@ -76,11 +76,7 @@ def count_project_lines(project_path="", file_types=[], includes=[], excludes=[]
                 if file in project_file and not any([file in out_file for out_file in excludes]):
                     try:
                         io_file = open(file, 'r')
-                    except PermissionError:
-                        continue
-                    except FileNotFoundError:
-                        continue
-                    except IsADirectoryError:
+                    except (PermissionError, FileNotFoundError, IsADirectoryError):
                         continue
                     data = io_file.readlines()
                     io_file.close()
@@ -93,11 +89,7 @@ def count_project_lines(project_path="", file_types=[], includes=[], excludes=[]
                 if file_type in file and not any([file in out_file for out_file in excludes]):
                     try:
                         io_file = open(file, 'r')
-                    except PermissionError:
-                        continue
-                    except FileNotFoundError:
-                        continue
-                    except IsADirectoryError:
+                    except (PermissionError, FileNotFoundError, IsADirectoryError):
                         continue
                     data = io_file.readlines()
                     io_file.close()
@@ -107,11 +99,7 @@ def count_project_lines(project_path="", file_types=[], includes=[], excludes=[]
             if not any([file in out_file for out_file in excludes]):
                 try:
                     io_file = open(file, 'r')
-                except PermissionError:
-                    continue
-                except FileNotFoundError:
-                    continue
-                except IsADirectoryError:
+                except (PermissionError, FileNotFoundError, IsADirectoryError):
                     continue
                 data = io_file.readlines()
                 io_file.close()

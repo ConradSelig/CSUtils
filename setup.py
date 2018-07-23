@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='CSUtils',
-    version='0.5.0',
+    version='0.5.1',
     packages=[''],
     url='https://github.com/ConradSelig/CSUtils',
     license='Apache Licence 2.0',
