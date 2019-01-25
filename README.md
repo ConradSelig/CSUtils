@@ -87,6 +87,7 @@ Using it like this allows the switch to be persistent, this means more case stat
 **flip(data, point_num=""):**
 * Returns a flipped version of data.
 * Supports the following data types:
+    * Boolean (False returns True and True returns False
     * Integer (1234 return 4321)
     * String ("Hello World" return "dlroW olleH")
     * List (["Hello", "World"] return ["World", "Hello"])
