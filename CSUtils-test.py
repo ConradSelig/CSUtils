@@ -97,6 +97,7 @@ def test_flip():
 
     return 0
 
+
 def run_tests():
 
     test_results = 0

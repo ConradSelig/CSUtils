@@ -1,3 +1,10 @@
+from excel import *
+
+
+def test():
+    print("Local Copy!")
+    return
+
 
 def match_data(current, all_data):
     import json
@@ -156,3 +163,5 @@ def flip(data, point_num=""):
         return data[::-1]
 
     return None
+
+
