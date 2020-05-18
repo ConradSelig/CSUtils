@@ -99,3 +99,22 @@ Using it like this allows the switch to be persistent, this means more case stat
             * flip(-5, 5) returns 15 
 * Returns None if given invalid data type (like a dictionary).
             
+**args2dict(args):**
+* Takes a list of command line arguments and converts it into a dictionary, catches invalid arguments.
+
+_This function does not expect any manipulation of the command line arguments to be done before they are passed in,
+    i.e. the first argument should still be the execution location._
+
+* Expected Argument Formats:
+    * No dash (x):        value. follows a double dash parameter
+    * Single dash (-x):   flag. Indicates a boolean value, does not have extended arguments
+    * Double dash (--x):  parameter. Indicates a following value is present.
+
+* Valid Examples (with function outputs):
+    * foo.exe -x                      => {"x": True}
+    * foo.exe --my-param "bar"        => {"my_param": "bar"}
+    * foo.exe -my-flag --y "bar" -z   => {"my_flag": True, "y": "bar", "z": True}
+
+* Invalid Examples:
+    * foo.exe -x --x "bar"        (dictionaries cannot have duplicate keys)
+    * foo.exe --x -y              (x parameter was not given a value)

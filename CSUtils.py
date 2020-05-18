@@ -1,7 +1,4 @@
-from excel import *
-
-
-def test():
+def __test():
     print("Local Copy!")
     return
 
@@ -165,3 +162,104 @@ def flip(data, point_num=""):
     return None
 
 
+def args2dict(args):
+    """ Takes a list of command line arguments and converts it into a dictionary, catches invalid arguments.
+
+    This function does not expect any manipulation of the command line arguments to be done before they are passed in,
+    i.e. the first argument should still be the execution location.
+
+    Expected Argument Formats:
+        No dash (x):        value. follows a double dash parameter
+        Single dash (-x):   flag. Indicates a boolean value, does not have extended arguments
+        Double dash (--x):  parameter. Indicates a following value is present.
+
+    Valid Examples (with function outputs):
+        foo.exe -x                      => {"x": True}
+        foo.exe --my-param "bar"        => {"my_param": "bar"}
+        foo.exe -my-flag --y "bar" -z   => {"my_flag": True, "y": "bar", "z": True}
+
+    Invalid Examples:
+        foo.exe -x --x "bar"        (dictionaries cannot have duplicate keys)
+        foo.exe --x -y              (x parameter was not given a value)
+
+
+    Author: Conrad Selig
+
+    :param args: list of command line arguments
+    :return: dict containing parsed args, or None if invalid arguments were given
+    """
+
+    # boolean will denote if the next argument needs to be skipped, this is used after a parameter is found.
+    skip_next = False
+    # dictionary we'll be returning
+    parsed_args = {}
+
+    # for all the given arguments, skip the first one (execution location)
+    for i, arg in enumerate(args[1:]):
+
+        # if we are skipping this arg
+        if skip_next:
+            # reset the skip flag
+            skip_next = False
+            # go to the next iter
+            continue
+
+        # if there are no dashes
+        if arg[0] != "-":
+            # invalid arguments given, return None
+            return None
+        # else check if it a param and not just a flag
+        elif arg[1] == "-":
+            # convert the arg to a list so we can change individual letters
+            arg = list(arg)
+            # loop through the argument (except the first two dashes), replacing dashes with underscores.
+            for j, letter in enumerate(arg[2:]):
+                if letter == "-":
+                    arg[j + 2] = "_"
+            # convert the arg back to a string
+            arg = "".join(arg)
+
+            # check to make sure this key is not already being used
+            if arg[2:] in parsed_args.keys():
+                # return invalid
+                return None
+
+            # insert that param into the parsed dictionary, as well as a holder value until we can pick up the real
+            # value
+            parsed_args[arg[2:]] = "tmp"
+
+            # check to make sure the next argument does not have any dashes, plus 2 is one for skipping the first arg
+            # and one for "next arg"
+            if args[i+2][0] == "-":
+                # if it does, given args are invalid
+                return None
+
+            # given args are still valid, replace tmp value with real value, plus 2 is one for skipping the first arg
+            # and one for "next arg"
+            parsed_args[arg[2:]] = args[i+2]
+
+            # set the skip next flag, so the next given argument is not processed normally
+            skip_next = True
+
+        # else given arg is a flag
+        else:
+
+            # convert the arg to a list so we can change individual letters
+            arg = list(arg)
+            # loop through the argument (except the first two dashes), replacing dashes with underscores.
+            for j, letter in enumerate(arg[1:]):
+                if letter == "-":
+                    arg[j + 1] = "_"
+            # convert the arg back to a string
+            arg = "".join(arg)
+
+            # check to make sure this key is not already being used
+            if arg[1:] in parsed_args.keys():
+                # return invalid
+                return None
+
+            # add the flag to parsed args dict, with value True
+            parsed_args[arg[1:]] = True
+
+    # return the dictionary
+    return parsed_args

@@ -98,6 +98,23 @@ def test_flip():
     return 0
 
 
+def test_args2dict():
+
+    try:
+        assert(CSUtils.args2dict(["foo.exe"]) == {})
+        assert(CSUtils.args2dict(["foo.exe", "-f"]) == {"f": True})
+        assert(CSUtils.args2dict(["foo.exe", "--f", "hello world"]) == {"f": "hello world"})
+        assert(CSUtils.args2dict(["foo.exe", "--my-param", "bar"]) == {"my_param": "bar"})
+        assert(CSUtils.args2dict(["foo.exe", "-my-flag", "--f", "bar"]) == {"my_flag": True, "f": "bar"})
+        assert(CSUtils.args2dict(["foo.exe", "-f", "--f", "bar"]) is None)
+        assert(CSUtils.args2dict(["foo.exe", "--f", "bar", "-f"]) is None)
+        assert(CSUtils.args2dict(["foo.exe", "--f", "bar", "-f", "bar"]) is None)
+    except AssertionError:
+        return 1
+
+    return 0
+
+
 def run_tests():
 
     test_results = 0
@@ -106,6 +123,7 @@ def run_tests():
     test_results += test_line_count()
     test_results += test_switch()
     test_results += test_flip()
+    test_results += test_args2dict()
 
     return test_results
 
